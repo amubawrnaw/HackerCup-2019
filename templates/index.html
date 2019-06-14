@@ -2,24 +2,53 @@
 <html>
 <head>
 
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
-
-
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
 </head>
 
 
 <body>
-Hello World
-<div id = "mamamo">
-
-</div>
+	Hello World
+	<input type = "text" value = "sample" placeholder = "sample">
+	<div id = "mamamo">
+	</div>
 
 
 <script>
 var data = {{ citydata|safe }};
-for(tite in data){
-	console.log(data[tite]['name']);
+var names = []
+var waters = {}
+for(name in data){
+	names.append(name)
+	waters[name] = data[name]['watervalue'];
 }
+
+function searchnames(search){
+	var searched = [];
+	for(name in names){
+		if(name.includes(search)){
+			searched.append(name);
+		}
+	}
+
+	return searched; 
+}
+
+function getTop(n){
+	/*
+		@desc  Gets top water in water list
+		@returns a list of lists that contains the key and value e.g. ([['manila', 123], ['laspinas', 421]])
+	*/
+	var items = Object.keys(waters).map(function(key) {
+		return [key, dict[key]];
+	});
+
+	items.sort(function(first, second) {
+		return second[1] - first[1];
+	});
+
+	console.log(items.slice(0, n));
+}
+
 </script>
 </body>
 
