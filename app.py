@@ -20,11 +20,20 @@ app.secret_key = __name__
 
 @app.route('/', methods=['GET', 'POST'])
 def start_app():
-	return render_template('index.html')
+	municities = pd.read_csv('shit.csv')
+	collected = []
+	for step, city in municities.iterrows():
+		temp_obj = {}
+		temp_obj['name'] = city['name']
+		temp_obj['coords'] = city['coords']
+		temp_obj['watervalue'] = city['watervalue']
+		collected.append(temp_obj)
+	stringed_data = json.dumps(collected)
+	return render_template('index.html', citydata = stringed_data)
 
 @app.route('/api/get_foiler', methods=['POST'])
 def get_foiler():
-	
+	municities = pd.read_json ('Amiel Stuff/municipalities.json')
 	pass
 
 if __name__ == '__main__':

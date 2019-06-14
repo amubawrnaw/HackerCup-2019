@@ -10,7 +10,17 @@
 
 <body>
 Hello World
+<div id = "mamamo">
 
+</div>
+
+
+<script>
+var data = {{ citydata|safe }};
+for(tite in data){
+	console.log(data[tite]['name']);
+}
+</script>
 </body>
 
 
