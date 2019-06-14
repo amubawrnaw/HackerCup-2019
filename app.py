@@ -22,6 +22,10 @@ app.secret_key = __name__
 def start_app():
 	return render_template('index.html')
 
+@app.route('/api/get_foiler', methods=['POST'])
+def get_foiler():
+	
+	pass
 
 if __name__ == '__main__':
 	app.run(debug=True)	
