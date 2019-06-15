@@ -4,7 +4,7 @@
     text-align: center;
     font-size: 30px;
     font-weight: 100;
-    font-family: Segoe UI;
+    font-family: Segoe UI, sans-serif, "Open-sans";
     color: #66FCF1;
 }
 
@@ -143,6 +143,9 @@ body{
     height: 34px;
     border: solid 1px #ddd;
     border-radius: 20px;
+    padding: 5px;
+    font-size: 1.1em;
+    padding-left: 20px;
 }
 
 #leftbar.active{
@@ -181,10 +184,16 @@ body{
 }
 
 #list{
-    margin-left: 10px;
+    /* margin-left: 10px; */
+    padding: 0;
     color: #66FCF1;
     font-family: Segoe UI;
     font-weight: 200;
+    overflow: auto;
+    height: auto;
+    max-height: 500px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 #update{
@@ -210,4 +219,45 @@ body{
 
 #updatetext{
     margin-left: 14px;
+}
+
+.searchpart{
+    height: 35px;
+    cursor: pointer;
+    line-height: 35px;
+    border: 0.5px solid #66FCF1;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+
+.sortbutton{
+    width: 200px;
+    height: 100%;
+    color: #66FCF1;
+
+    border: 0.5px solid #66FCF1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+}
+
+.sortcontainer{
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+
+}
+
+.searchspan{
+    float: right;
+}
+.namespan{
+    float: left;
 }

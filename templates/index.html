@@ -45,10 +45,13 @@
                         <span>Search</span>
                         <image id = 'searchicon' src = "static/search-12-48.png"></image>
                     </div>
-                    <input id = 'keyword' type = "text" placeholder="   Search..." >
-                    
-                    <div id = 'list'> Result 
-                    
+                    <input id = 'keyword' type = "text" placeholder="   Search..." onchange="searchnames(this.value)" >
+                    <div class = "sortcontainer">
+					<div class = "sortbutton" onclick="sortname()">SORT NAME</div>
+					
+					<div class = "sortbutton" onclick="sortsearch()">SORT VALUE</div>
+					</div>
+                    <div id = 'list'> 
                     </div>
                    
                     
@@ -62,14 +65,96 @@
 </html>
 <script>
 	var data2 = {{ citydata|safe }};
-
+	
 	var names = []
 	var data = {}
+	var searchlist = []
 	for(name in data2){
 		names.push(name)
 		data[name] = data2[name]['watervalue'];
 	}
-	console.log(data);
+
+
+
+	function searchnames(search){
+		var searched = [];
+		for(name in names){
+			if(names[name].toLowerCase().includes(search.toLowerCase())){
+				searched.push(names[name]);
+			}
+		}
+		
+		var elem = document.getElementById('list');
+		elem.innerHTML = "";
+		for(search in searched){
+			elem.innerHTML += '<div class = "searchpart" onclick = "joshkasi(\''+searched[search]+'\')"><div class = "namespan">'+searched[search]+'</div><div class = "searchspan">'+data[searched[search]]+'</div></div>';
+		}
+		searchlist = searched;
+		return searched; 
+	}
+
+	function sortsearch(){
+		var llist = []
+		if(searchlist.length == 0){
+			llist = names;
+		}
+		else{
+			llist = searchlist;
+		}
+		var newd = {}
+		for(name in llist){
+			newd[llist[name]] = data[llist[name]]
+		}
+
+		// Create items array
+		var items = Object.keys(newd).map(function(key) {
+		return [key, newd[key]];
+		});
+		
+		// Sort the array based on the second element
+		items.sort(function(first, second) {
+		return second[1] - first[1];
+		});
+
+		var elem = document.getElementById('list');
+		elem.innerHTML = "";
+		for(key in items){
+			elem.innerHTML += '<div class = "searchpart" onclick = "joshkasi(\''+items[key][0]+'\')"><div class = "namespan">'+items[key][0]+'</div><div class = "searchspan">'+items[key][1]+'</div></div>';
+		}
+
+	}
+
+	function sortname(){
+		var llist = []
+		if(searchlist.length == 0){
+			llist = names;
+		}
+		else{
+			llist = searchlist;
+		}
+		var newd = {}
+		for(name in llist){
+			newd[llist[name]] = data[llist[name]]
+		}
+
+		// Create items array
+		var items = Object.keys(newd).map(function(key) {
+		return [key, newd[key]];
+		});
+		
+		// Sort the array based on the second element
+		items.sort(function(first, second) {
+		return second[0] - first[0];
+		});
+
+		var elem = document.getElementById('list');
+		elem.innerHTML = "";
+		for(key in items){
+			elem.innerHTML += '<div class = "searchpart" onclick = "joshkasi(\''+items[key][0]+'\')"><div class = "namespan">'+items[key][0]+'</div><div class = "searchspan">'+items[key][1]+'</div></div>';
+		}
+
+	}
+
     var map = L.map('map', { zoomControl:false });
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'})
