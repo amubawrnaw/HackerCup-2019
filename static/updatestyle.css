@@ -1,0 +1,101 @@
+.headertext{
+    margin-top: 6px;
+    margin-left: 10px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    font-family: Segoe UI;
+    color: #66FCF1 ;
+    
+}
+
+body{
+    background-color:#0B0C10; 
+    padding: 0;
+    margin: 0;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+}
+
+.header{
+    position: relative;
+    width: 100%;
+    height: 56px;
+    background-color: #1F2833 ;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#watericon{
+    margin-top: 10px;
+    margin-left: 8px;
+    display: inline;
+    width : 32px;
+    height: 32px;
+}
+
+#province{
+    background-color: #0B0C10;
+    border: 2px solid #66FCF1;
+    margin-top: 50px;
+    width: 426px;
+    height: 60px;
+    color:white;
+    border-radius: 40px;
+}
+
+#waterlevel{
+    background-color: #0B0C10;
+    border: 2px solid #66FCF1;
+    margin-top: 20px;
+    width: 426px;
+    height: 60px;
+    color:white;
+    border-radius: 40px;
+}
+
+
+#consumption{
+    background-color: #0B0C10;
+    border: 2px solid #66FCF1;
+    margin-top: 20px;
+    width: 426px;
+    height: 60px;
+    color:white;
+    border-radius: 40px;
+}
+
+#update{
+    left: 50px;
+    background-color: #0B0C10;
+    border: 2px solid #66FCF1;
+    margin-top: 50px;
+     width: 180px;
+    height: 48px;
+    color: white;
+    font-family: Segoe UI;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 40px;
+}
+
+.text{
+    margin-top: 190px;
+    font-family: Segoe UI;
+    font-weight: 600;
+    color:#66FCF1;
+    font-size: 30px;
+}
+
+::placeholder {
+  color: gray;
+  opacity: 1; 
+}
