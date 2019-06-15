@@ -48,10 +48,9 @@
                         <span>Search</span>
                         <image id = 'searchicon' src = "static/search-12-48.png"></image>
                     </div>
-                    <input id = 'keyword' type = "text" placeholder="   Search..." >
+                    <input id = 'keyword' type = "text" placeholder="   Search..." onchange="searchnames(this.value)" >
                     
-                    <div id = 'list'> Result 
-                    
+                    <div id = 'list'> 
                     </div>
                    
                     
@@ -65,14 +64,33 @@
 </html>
 <script>
 	var data2 = {{ citydata|safe }};
-
+	
 	var names = []
 	var data = {}
 	for(name in data2){
 		names.push(name)
 		data[name] = data2[name]['watervalue'];
 	}
-	console.log(data);
+
+
+
+	function searchnames(search){
+		var searched = [];
+		for(name in names){
+			if(names[name].toLowerCase().includes(search.toLowerCase())){
+				searched.push(names[name]);
+			}
+		}
+		
+		var elem = document.getElementById('list');
+		elem.innerHTML = "";
+		for(search in searched){
+			elem.innerHTML += '<div class = "searchpart" onclick = "clicksearch(\''+searched[search]+'\')">'+searched[search]+'</div>';
+		}
+
+		return searched; 
+	}
+
     var map = L.map('map', { zoomControl:false });
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'})
