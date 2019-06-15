@@ -34,6 +34,11 @@ def start_app():
 	stringed_data = json.dumps(collected)
 	return render_template('index.html', citydata = stringed_data)
 
+
+@app.route('/updateinfo', methods=['GET', 'POST'])
+def get_updateinfo():
+	return render_template('update.html')
+
 @app.route('/api/get_foiler', methods=['POST'])
 def get_foiler():
 	municities = pd.read_json ('Amiel Stuff/municipalities.json')
@@ -50,6 +55,10 @@ def update_anobj():
 	anobj[name]['consumption'] con
 	
 @app.route('/api/get_geojson', methods = ['GET'])
+def get_geoejson():
+	pass
+
+
 
 if __name__ == '__main__':
 

@@ -48,7 +48,13 @@ def update_anobj():
 	anobj[name]['population'] = pop
 	anobj[name]['waterval'] = wat
 	anobj[name]['consumption'] = con
-	
+
+
+
+@app.route('/updateinfo', methods=['GET', 'POST'])
+def get_updateinfo():
+	return render_template('update.html')
+
 
 if __name__ == '__main__':
 
