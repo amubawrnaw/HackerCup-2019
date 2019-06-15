@@ -22,16 +22,15 @@ global anobj
 
 @app.route('/', methods=['GET', 'POST'])
 def start_app():
-	municities = pd.read_csv('shit.csv')
+	municities = pd.read_csv('data.csv')
 	collected = {}
 	for step, city in municities.iterrows():
 		temp_obj = {}
 		temp_obj['name'] = city['name']
 		temp_obj['coords'] = city['coords']
 		temp_obj['watervalue'] = city['watervalue']
+		temp_obj['avg consump'] = city['avg consump']
 		collected[city['name']] = temp_obj
-	
-
 	stringed_data = json.dumps(collected)
 	return render_template('index.html', citydata = stringed_data)
 

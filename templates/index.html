@@ -7,7 +7,7 @@
         <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
         <script src="{{url_for('static', filename='script.js')}}"></script>
 		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='stylesheet.css')}}">
-		
+
         <style>
             html, body, #map{
                 height: 100%;
@@ -64,6 +64,15 @@
     </body>
 </html>
 <script>
+	var data2 = {{ citydata|safe }};
+
+	var names = []
+	var data = {}
+	for(name in data2){
+		names.push(name)
+		data[name] = data2[name]['watervalue'];
+	}
+	console.log(data);
     var map = L.map('map', { zoomControl:false });
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'})
