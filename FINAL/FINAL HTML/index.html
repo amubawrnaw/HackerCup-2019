@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <link rel = 'stylesheet' href="stylesheet.css">
+        <script src ="script.js"></script>
+        <title>UN Water</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+        <script src="script.js"></script>
+        <style>
+            html, body, #map{
+                height: 100%;
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div id = "map"></div>
+        <div class = 'container'>
+            <div class = 'header'>
+                <div><image id = 'watericon' src ="water-64.png"></image></div>
+                <div class = 'headertext'>UN WATER MONITOR</div>
+            </div>
+            
+            <div id = 'sidebar'>
+                <div class = 'toggle-button' onclick="toggleSidebar()">
+                    <span>Info</span>
+                    <image id = 'arrowicon' src="arrow-93-48.png"></image>
+                </div>
+                <div id = 'bname'>Name</div>
+                <div id = 'availablewater'>Available Water per month</div>
+                <div id = 'price'>Price per litre</div>
+                <div id = 'consumption'>Average water consumption</div>
+                <div id = 'supplier'>Water supplier</div>
+                <div id = 'status'>Water Status</div>
+                
+            </div>
+            
+            <div id = 'update'>
+                <a id = 'updatetext'>Update Info</a>
+            </div>
+            
+            <div id = 'leftbar'>
+                    <div class = 'left-toggle-button' onclick = "toggleLeftbar()">
+                        <span>Search</span>
+                        <image id = 'searchicon' src = "search-12-48.png"></image>
+                    </div>
+                    <input id = 'keyword' type = "text" placeholder="   Search..." >
+                    
+                    <div id = 'list'> Result 
+                    
+                    </div>
+                   
+                    
+            </div>
+            
+            <div class = 'bottom'>
+            
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    var map = L.map('map', { zoomControl:false });
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'})
+    .addTo(map);
+
+    function getColor(city) {
+        var val = data[city];
+        console.log(val);
+        return val > 12000 ? '#045a8d' :
+               val > 10000  ? '#2b8cbe' :
+               val > 8000  ? '#74a9cf' :
+               val > 5000  ? '#a6bddb' :
+               val > 2000   ? '#d0d1e6' : 
+                            '#f1eef6';
+    }
+
+    function style(feature) {
+        return {
+            fillColor: getColor(feature.properties.NAME_1),
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7
+        };
+    }
+
+    function deets(e){
+        console.log(e.target.feature.properties.NAME_1);
+    }
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            click: deets
+        });
+    }
+    map.setView([17.95706, 120.967949], 5);
+    L.geoJson(geojson, {style: style, onEachFeature: onEachFeature}).addTo(map);
+</script>

@@ -1,26 +1,56 @@
-
-
-
 <html>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<head>
+  <title>How to make a choropleth map with Leaflet.js</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  	<script src="script.js"></script>
+	<style type="text/css">
+	 	html, body, #map{
+	 		height: 100%;
+	 		padding: 0;
+	 		margin: 0;
+	 	}
+	</style>
+
+</head>
+<body>
+
+	<div id="map"></map>
+
 	<script>
-		$(document).ready(function(){
-		   
-		   $('.test').html(``);
+		console.log("wtf");
+	var statesData = geojson;
+	var map = L.map('map').setView([120.967949, 17.95706], 6);
 
-		});
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'})
+	.addTo(map);
 
+	function getColor(city) {
+		var	val = data[city];
+		console.log(val);
+	    return val > 12000 ? '#800026' :
+	           val > 10000  ? '#BD0026' :
+	           val > 8000  ? '#E31A1C' :
+	           val > 5000  ? '#FC4E2A' :
+	           val > 2000   ? '#FD8D3C' : 
+	           				'#FEB24C';
+	}
+
+	function style(feature) {
+	    return {
+	        fillColor: getColor(feature.properties.NAME_1),
+	        weight: 2,
+	        opacity: 1,
+	        color: 'white',
+	        dashArray: '3',
+	        fillOpacity: 0.7
+	    };
+	}
+
+	L.geoJson(statesData, {style: style}).addTo(map);
+	
 	</script>
-	<script>
-		function test(){
-			alert("test");
-		}
-		$(".test").on('click','.leaflet-interactive',(test));
-	</script>
-	<body>
-		<div class = "test">
 
-
-		</div>
-	</body>
+</body>
 </html>
