@@ -18,8 +18,6 @@ app = Flask(__name__)
 app.secret_key = __name__
 
 
-global anobj
-
 @app.route('/', methods=['GET', 'POST'])
 def start_app():
 	municities = pd.read_csv('data.csv')
@@ -41,25 +39,35 @@ def get_foiler():
 
 @app.route('/api/updateanobj', methods=['POST'])
 def update_anobj():
-	name = request.args.get("name")
-	pop = request.args.get("population")
-	wat = request.args.get("waterval")
-	con = request.args.get("consumption")
-	anobj[name]['population'] = pop
-	anobj[name]['waterval'] = wat
-	anobj[name]['consumption'] = con
-	
 
-if __name__ == '__main__':
-
-	municities = pd.read_csv('shit.csv')
+	municities = pd.read_csv('data.csv')
 	collected = {}
 	for step, city in municities.iterrows():
 		temp_obj = {}
 		temp_obj['name'] = city['name']
 		temp_obj['coords'] = city['coords']
 		temp_obj['watervalue'] = city['watervalue']
+		temp_obj['avg consump'] = city['avg consump']
 		collected[city['name']] = temp_obj
+	name = request.form["name"]
+	wat = request.form["waterlevel"]
+	con = request.form["consumption"]
+	collected[name]['watervalue'] = wat
+	collected[name]['avg consump'] = con
+	li = []
+	for obj in collected:
+		li.append(collected[obj])
+
+	df = pd.DataFrame(li)
+	df.to_csv('data.csv')
+	return render_template('update.html')
+
+@app.route('/updateinfo', methods=['GET', 'POST'])
+def get_updateinfo():
+	return render_template('update.html')
+
+
+if __name__ == '__main__':
+
 	
-	anobj = collected
 	app.run(debug=True)	

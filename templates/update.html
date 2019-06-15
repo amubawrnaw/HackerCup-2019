@@ -1,0 +1,24 @@
+<html>
+    
+    <head>
+        <link rel="stylesheet"  type="text/css"  href = "{{url_for('static', filename='updatestyle.css')}}">
+    </head>
+    
+    <body>
+        <div class = 'container'>
+            
+            <div class = 'header'>
+                <div><image id = 'watericon' src ="static/water-64.png"></image></div>
+                <div class = 'headertext'>UN Water Monitor</div>
+            </div>
+            <form action = "/api/updateanobj" method = "POST">
+                <div class = 'text'>Update Details</div>
+                <div><input name = 'name' type = 'text' id = 'name' placeholder = "    Province"></div>
+                <div><input name = 'waterlevel'  type = 'text' id = 'waterlevel' placeholder = "    Water Level"></div>
+                <div><input name = 'consumption' type = 'text' id = 'consumption' placeholder = "    Avg Consumption"></div>
+                <div><input type = submit id = 'update'></div>
+            </form>
+        </div>
+    </body>
+    
+</html>
