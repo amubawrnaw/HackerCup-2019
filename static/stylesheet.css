@@ -143,6 +143,9 @@ body{
     height: 34px;
     border: solid 1px #ddd;
     border-radius: 20px;
+    padding: 5px;
+    font-size: 1.1em;
+    padding-left: 20px;
 }
 
 #leftbar.active{
